@@ -1,0 +1,21 @@
+{
+  "name": "tetris",
+  "version": "1.0.0",
+  "description": "basic tetris game",
+  "main": "app.js",
+  "scripts": {
+    "start": "open /Users/isselinm/Documents/GitHub/tetris/index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "isselinm28",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.17.6",
+    "@babel/core": "^7.17.9",
+    "eslint": "^8.13.0",
+    "prettier": "2.6.2"
+  },
+  "dependencies": {
+    "open": "^8.4.0"
+  }
+}
