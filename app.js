@@ -43,14 +43,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const theTetrominoes = [lTetromino, zTetromino, oTetromino, iTetromino];
 
-  let currentPosition = 3;
+  let currentPosition = 4;
   let currentRotation = 0;
   //randomly select tetromino
   let random = Math.floor(Math.random() * theTetrominoes.length);
-  let current = theTetrominoes[0][0];
+  let current = theTetrominoes[random][currentRotation];
 
-  //draw the first roation in the first tetromino
-
+  //draw the tetromino
   function draw() {
     current.forEach((index) => {
       squares[currentPosition + index].classList.add("tetromino");
@@ -62,5 +61,53 @@ document.addEventListener("DOMContentLoaded", () => {
     current.forEach((index) => {
       squares[currentPosition + index].classList.remove("tetromino");
     });
+  }
+
+  //make the tetromino move down every second
+  timerId = setInterval(moveDown, 100);
+
+  //move down function
+  function moveDown() {
+    undraw();
+    currentPosition += width;
+    draw();
+    freeze();
+  }
+
+  //freeze function when reach bottom
+  function freeze() {
+    const isReachBottom = current.some((index) =>
+      squares[currentPosition + index + width].classList.contains("taken")
+    );
+
+    if (isReachBottom) {
+      current.forEach((index) =>
+        squares[currentPosition + index].classList.add("taken")
+      );
+
+      //start a new tetromino falling
+      random = Math.floor(Math.random() * theTetrominoes.length);
+      current = theTetrominoes[random][currentRotation];
+      currentPosition = 4;
+      draw();
+    }
+  }
+
+  //move the tetromino left, unless it's at edge or there's blockage
+  function moveLeft() {
+    undraw();
+    const isAtLeftEdge = current.some(
+      (index) => (currentPosition + index) % 10 === 0
+    );
+
+    if (!isAtLeftEdge) currentPosition -= 1;
+
+    const isTaken = current.some((index) =>
+      squares[currentPosition + index].classList.contains("taken")
+    );
+
+    if (isTaken) currentPosition += 1;
+
+    draw();
   }
 });
