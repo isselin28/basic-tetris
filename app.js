@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const width = 10;
   let nextRandom = 0;
   let timerId;
+  let score = 0;
 
   const lTetromino = [
     [1, width + 1, width * 2 + 1, 2],
@@ -114,6 +115,8 @@ document.addEventListener("DOMContentLoaded", () => {
       currentPosition = 4;
       draw();
       displayShape();
+      addScore();
+      gameOver();
     }
   }
 
@@ -204,4 +207,48 @@ document.addEventListener("DOMContentLoaded", () => {
       displayShape();
     }
   });
+
+  //add score
+  function addScore() {
+    for (let i = 0; i < 199; i += width) {
+      const row = [
+        i,
+        i + 1,
+        i + 2,
+        i + 3,
+        i + 4,
+        i + 5,
+        i + 6,
+        i + 7,
+        i + 8,
+        i + 9,
+        i + 10,
+      ];
+
+      if (row.every((index) => squares[index].classList.contains("taken"))) {
+        score += 10;
+        ScoreDisplay.innerHTML = score;
+        row.forEach((index) => {
+          squares[index].classList.remove("taken");
+          squares[index].classList.remove("tetromino");
+          squares[index].style.backgroundColor = "";
+        });
+        const squaresRemoved = squares.splice(i, width);
+        squares = squaresRemoved.concat(squares);
+        squares.forEach((cell) => grid.appendChild(cell));
+      }
+    }
+  }
+
+  //game over
+  function gameOver() {
+    // if the first line of div on top is taken then its game over
+    const isOver = current.some((index) =>
+      squares[currentPosition + index].classList.contains("taken")
+    );
+    if (isOver) {
+      ScoreDisplay.innerHTML = "end";
+      clearInterval(timerId);
+    }
+  }
 });
