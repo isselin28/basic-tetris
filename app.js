@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const width = 10;
   let nextRandom = 0;
+  let timerId;
 
   const lTetromino = [
     [1, width + 1, width * 2 + 1, 2],
@@ -71,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   //make the tetromino move down every second
-  timerId = setInterval(moveDown, 500);
+  //   timerId = setInterval(moveDown, 500);
 
   //assign functions to keyCodeds
   function control(e) {
@@ -188,4 +189,19 @@ document.addEventListener("DOMContentLoaded", () => {
       displaySquares[displayIndex + index].classList.add("tetromino"),
     ]);
   }
+
+  //add functionality to the button
+  StartBtn.addEventListener("click", () => {
+    if (timerId) {
+      //pause game
+      clearInterval(timerId);
+      timerId = null;
+    } else {
+      //start game
+      draw();
+      timerId = setInterval(moveDown, 500);
+      nextRandom = Math.floor(Math.random() * theTetrominoes.length);
+      displayShape();
+    }
+  });
 });
