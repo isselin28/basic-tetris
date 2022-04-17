@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let nextRandom = 0;
   let timerId;
   let score = 0;
+  let speed = 500;
 
   // cream, yellow, green, orange, red
   const colors = ["#e9d8a6", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51"];
@@ -167,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
     draw();
   }
 
-  //
+  //check if tetromino rotates over the edge
   function isAtRight() {
     return current.some((index) => (currentPosition + index + 1) % width === 0);
   }
@@ -179,15 +180,18 @@ document.addEventListener("DOMContentLoaded", () => {
   function checkRotatedPosition(P) {
     P = P || currentPosition;
 
-    if ((P + 1) % width < 4) {
-      if (isAtRight()) {
+    const rightOverflowPosition = (P + 1) % width < 4;
+    const leftOverflowPosition = P % width > 5;
+
+    if (isAtRight()) {
+      if (rightOverflowPosition) {
         currentPosition += 1;
         checkRotatedPosition(P);
       }
     }
 
-    if (P % width > 5) {
-      if (isAtLeft()) {
+    if (!rightOverflowPosition && isAtLeft()) {
+      if (leftOverflowPosition) {
         currentPosition -= 1;
         checkRotatedPosition(P);
       }
@@ -261,7 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
       //start game
       document.addEventListener("keyup", control);
       draw();
-      timerId = setInterval(moveDown, 500);
+      timerId = setInterval(moveDown, speed);
       nextRandom = Math.floor(Math.random() * theTetrominoes.length);
       displayShape();
       StartOverBtn.style.display = "inline";
@@ -287,6 +291,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (row.every((index) => squares[index].classList.contains("taken"))) {
         score += 10;
+        speed = 500 - score * 5;
+        if (speed <= 100) speed = 100;
+        timerId = setInterval(moveDown, speed);
         ScoreDisplay.innerHTML = score;
         row.forEach((index) => {
           squares[index].classList.remove("taken");
