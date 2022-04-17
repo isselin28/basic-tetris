@@ -92,7 +92,6 @@ document.addEventListener("DOMContentLoaded", () => {
       moveDown();
     }
   }
-  document.addEventListener("keyup", control);
 
   //move down function
   function moveDown() {
@@ -221,10 +220,12 @@ document.addEventListener("DOMContentLoaded", () => {
       //pause game
       clearInterval(timerId);
       timerId = null;
+      document.removeEventListener("keyup", control);
     } else {
       //start game
+      document.addEventListener("keyup", control);
       draw();
-      timerId = setInterval(moveDown, 100);
+      timerId = setInterval(moveDown, 500);
       nextRandom = Math.floor(Math.random() * theTetrominoes.length);
       displayShape();
       StartOverBtn.style.display = "inline";
@@ -245,10 +246,7 @@ document.addEventListener("DOMContentLoaded", () => {
         i + 7,
         i + 8,
         i + 9,
-        i + 10,
       ];
-
-      console.log(row);
 
       if (row.every((index) => squares[index].classList.contains("taken"))) {
         score += 10;
@@ -293,6 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
     clearInterval(timerId);
     timerId = null;
     score = 0;
+    ScoreDisplay.innerHTML = score;
     currentPosition = 4;
   });
 });
