@@ -22,7 +22,7 @@
 }
 
 .tetromino {
-  background-color: blue;
+  background-color: #264653;
   border: 1px solid #264653;
 }
 
@@ -55,16 +55,23 @@ body {
   flex-direction: column;
   margin-left: 50px;
   width: 160px;
-  height: 240px;
+  height: 440px;
   background-color: #264653;
   padding: 10px;
+  position: relative;
 }
 
 .button {
-  border-radius: 2px;
+  border-radius: 4px;
   background-color: #e9d8a6;
   color: #264653;
-  padding: 10px;
+  padding: 8px;
+  cursor: pointer;
+  border: 3.5px solid #264653;
+}
+
+.button:hover {
+  border: 3.5px solid #c4af70;
 }
 
 .score {
@@ -73,4 +80,21 @@ body {
 
 .oneLeft {
   margin-left: 20px;
+}
+
+.start-over-btn {
+  display: none;
+  position: absolute;
+  bottom: 20px;
+  color: #e9d8a6;
+  border: 1px solid #e9d8a6;
+  padding: 8px;
+  border-radius: 2px;
+  cursor: pointer;
+  padding-bottom: 10px;
+}
+
+.start-over-btn:hover {
+  border: 3px solid #e9d8a6;
+  padding: 8px;
 }
