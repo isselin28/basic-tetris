@@ -160,15 +160,44 @@ document.addEventListener("DOMContentLoaded", () => {
     draw();
   }
 
+  //
+  function isAtRight() {
+    return current.some((index) => (currentPosition + index + 1) % width === 0);
+  }
+
+  function isAtLeft() {
+    return current.some((index) => (currentPosition + index) % width === 0);
+  }
+
+  function checkRotatedPosition(P) {
+    P = P || currentPosition;
+
+    if ((P + 1) % width < 4) {
+      if (isAtRight()) {
+        currentPosition += 1;
+        checkRotatedPosition(P);
+      }
+    }
+
+    if (P % width > 5) {
+      if (isAtLeft()) {
+        currentPosition -= 1;
+        checkRotatedPosition(P);
+      }
+    }
+  }
+
   //rotate the tetromino
   function rotate() {
     undraw();
     currentRotation++;
+
     if (currentRotation === current.length) {
       // if the current rotation gets to 4, make it go back to 0
       currentRotation = 0;
     }
     current = theTetrominoes[random][currentRotation];
+    checkRotatedPosition();
     draw();
   }
 
@@ -277,7 +306,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //start over
   StartOverBtn.addEventListener("click", () => {
-    for (let i = 0; i < 199; i++) {
+    for (let i = 0; i < 200; i++) {
       squares[i].classList.remove("taken");
       squares[i].style.backgroundColor = "";
     }
