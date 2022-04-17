@@ -125,10 +125,10 @@ document.addEventListener("DOMContentLoaded", () => {
       nextRandom = Math.floor(Math.random() * theTetrominoes.length);
       current = theTetrominoes[random][currentRotation];
       currentPosition = 4;
+      gameOver();
       draw();
       displayShape();
       addScore();
-      gameOver();
     }
   }
 
@@ -316,6 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isOver) {
       ScoreDisplay.innerHTML = "end";
       clearInterval(timerId);
+      document.removeEventListener("keyup", control);
     }
   }
 

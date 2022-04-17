@@ -1,5 +1,7 @@
 .container {
   display: flex;
+  color: #e9d8a6;
+  margin-top: 60px;
 }
 
 .grid {
@@ -100,4 +102,10 @@ body {
 .start-over-btn:hover {
   border: 3px solid #e9d8a6;
   padding: 8px;
+}
+
+.title {
+  position: absolute;
+  top: 10px;
+  color: #e9d8a6;
 }
