@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  //assign functions to keyCodeds
+  //assign functions to keyCode
   function control(e) {
     if (e.keyCode === 37) {
       moveLeft();
@@ -92,6 +92,13 @@ document.addEventListener("DOMContentLoaded", () => {
       moveDown();
     }
   }
+
+  function spacebar(e) {
+    if (e.keyCode === 32) {
+      startPauseButton();
+    }
+  }
+  document.addEventListener("keyup", spacebar);
 
   //move down function
   function moveDown() {
@@ -244,7 +251,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   //add functionality to the button
-  StartBtn.addEventListener("click", () => {
+  function startPauseButton() {
     if (timerId) {
       //pause game
       clearInterval(timerId);
@@ -259,7 +266,8 @@ document.addEventListener("DOMContentLoaded", () => {
       displayShape();
       StartOverBtn.style.display = "inline";
     }
-  });
+  }
+  StartBtn.addEventListener("click", () => startPauseButton());
 
   //add score
   function addScore() {
