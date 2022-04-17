@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css"></link>
     <title>Basic Tetris</title>
   </head>
-  <body class="body">
+  <body>
     <div class="container">
       <div class="grid">
         <div></div>
@@ -221,8 +221,10 @@
         <div class="taken"></div>
         <div class="taken"></div>
       </div>
-    
+
+      
       <div class="display-box">
+        <h3 class="score">Up next</h3>
         <div class="mini-grid">
           <div></div>
           <div></div>
@@ -242,8 +244,8 @@
           <div></div>
         </div>
 
-        <h3>Score: <span id="score">0</span></h3>
-        <button id="start-button">Start/Pause</button>
+        <h3 class="score">Score: <span class="score" id="score">0</span></h3>
+        <div id="start-button" class="button">Start/Pause</div>
       </div>
     </div>
   </body>

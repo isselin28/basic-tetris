@@ -4,12 +4,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const ScoreDisplay = document.querySelector("#score");
   const StartBtn = document.querySelector("#start-button");
 
+  const miniGrid = document.querySelector(".mini-grid");
+
   const width = 10;
   let nextRandom = 0;
   let timerId;
   let score = 0;
 
-  const colors = ["orange", "purple", "green", "blue", "red"];
+  // cream, yellow, green, orange, red
+  const colors = ["#e9d8a6", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51"];
 
   const lTetromino = [
     [1, width + 1, width * 2 + 1, 2],
@@ -190,11 +193,25 @@ document.addEventListener("DOMContentLoaded", () => {
       square.classList.remove("tetromino");
       square.style.backgroundColor = "";
     });
-    upNextTetrominoes[nextRandom].forEach((index) => [
-      displaySquares[displayIndex + index].classList.add("tetromino"),
-      (displaySquares[displayIndex + index].style.backgroundColor =
-        colors[nextRandom]),
-    ]);
+
+    // shifting the next tetromino css for display purpose
+    if (nextRandom === 1 || nextRandom === 3) {
+      miniGrid.style.marginLeft = "40px";
+    }
+    if (nextRandom === 2 || nextRandom === 4) {
+      miniGrid.style.marginLeft = "20px";
+    }
+    if (nextRandom === 0) {
+      miniGrid.style.marginLeft = "0px";
+    }
+
+    upNextTetrominoes[nextRandom].forEach((index) => {
+      return [
+        displaySquares[displayIndex + index].classList.add("tetromino"),
+        (displaySquares[displayIndex + index].style.backgroundColor =
+          colors[nextRandom]),
+      ];
+    });
   }
 
   //add functionality to the button
@@ -206,7 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       //start game
       draw();
-      timerId = setInterval(moveDown, 500);
+      timerId = setInterval(moveDown, 100);
       nextRandom = Math.floor(Math.random() * theTetrominoes.length);
       displayShape();
     }

@@ -3,41 +3,50 @@
 }
 
 .grid {
-  width: 200px;
-  height: 400px;
+  width: 220px;
+  height: 440px;
   display: flex;
   flex-wrap: wrap;
-  background-color: yellow;
+  justify-content: space-between;
+  background-color: #264653;
+  border: 3px solid #e9d8a6;
+  border-left: none;
+  border-right: none;
+  border-radius: 4px;
 }
 
 .grid div {
   height: 20px;
   width: 20px;
+  border: 1px solid #264653;
 }
 
 .tetromino {
   background-color: blue;
+  border: 1px solid #264653;
 }
 
 .mini-grid {
-  width: 80px;
-  height: 80px;
+  width: 88px;
+  height: 88px;
   display: flex;
   flex-wrap: wrap;
-  background-color: yellow;
+  background-color: #264653;
 }
 
 .mini-grid div {
   height: 20px;
   width: 20px;
+  border: 1px solid #264653;
 }
 
-.body {
-  width: 100%;
+body {
+  width: 100wh;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #264653;
 }
 
 .display-box {
@@ -47,6 +56,21 @@
   margin-left: 50px;
   width: 160px;
   height: 240px;
-  background-color: red;
+  background-color: #264653;
   padding: 10px;
+}
+
+.button {
+  border-radius: 2px;
+  background-color: #e9d8a6;
+  color: #264653;
+  padding: 10px;
+}
+
+.score {
+  color: #e9d8a6;
+}
+
+.oneLeft {
+  margin-left: 20px;
 }
