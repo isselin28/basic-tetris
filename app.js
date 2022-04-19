@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let nextRandom = 0;
   let timerId;
   let score = 0;
-  let speed = 500;
+  let speed = 100;
 
   // cream, yellow, green, orange, red
   const colors = ["#e9d8a6", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51"];
@@ -335,6 +335,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     clearInterval(timerId);
     timerId = null;
+    speed = 500;
     score = 0;
     ScoreDisplay.innerHTML = score;
     currentPosition = 4;
