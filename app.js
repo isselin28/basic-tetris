@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let nextRandom = 0;
   let timerId;
   let score = 0;
-  let speed = 100;
+  let speed = 500;
 
   // cream, yellow, green, orange, red
   const colors = ["#e9d8a6", "#2a9d8f", "#e9c46a", "#f4a261", "#e76f51"];
@@ -291,7 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (row.every((index) => squares[index].classList.contains("taken"))) {
         score += 10;
-        speed = 500 - score * 5;
+        speed -= 50;
         if (speed <= 100) speed = 100;
         timerId = setInterval(moveDown, speed);
         ScoreDisplay.innerHTML = score;
