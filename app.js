@@ -332,6 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     StartOverBtn.style.display = "none";
+    document.addEventListener("keyup", control);
 
     clearInterval(timerId);
     timerId = null;
